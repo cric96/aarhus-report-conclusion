@@ -24,11 +24,12 @@ Spatiotemporal phenomena tracking and covering in Cyber-Physical Swarms \\[10pt]
 \maketitle
 
 \begin{abstract}
-The main focus of this work was on the topic of engineering Cyber-physical Swarms (CPSWs), which are large ensembles of computational devices that work together to achieve a goal through local interactions. CPSWs can include systems such as swarm robotics, large-scale Internet of Things (IoT), and smart cities, and are characterized by decentralized behaviour, large scale, embodiment (having sensors to perceive the environment), and partial observability (each node can communicate with only a subset of the entire system). The main contribution of this work was the combination of aggregate computing (AC) with graph neural networks (GNNs) to predict spatio-temporal data in CPSWs. The process involved generating synthetic data to simulate a spatio-temporal phenomenon, training various spatio-temporal network models, integrating AC with GNNs using ScaFi and ScalaPy, and validating the results through the export of performance metrics. As a side effect, the work also produced several public repositories containing code and examples for use in future work on CPSWs.
+The focus of this work is on the topic of engineering Cyber-physical Swarms (CPSWs), which are large ensembles of computational devices that work together to achieve a goal through local interactions. CPSWs can include systems such as swarm robotics, large-scale Internet of Things (IoT), and smart cities, and are characterized by decentralized behaviour, large scale, embodiment (having sensors to perceive the environment), and partial observability (each node can communicate with only a subset of the entire system). The main contribution of this work is the combined use of aggregate computing (AC) with graph neural networks (GNNs) to predict spatio-temporal data in CPSWs. 
+This combination involves generating synthetic data to simulate a spatio-temporal phenomenon, training various spatio-temporal network models, integrating AC with GNNs using ScaFi and ScalaPy, and validating the results through the export of performance metrics. As a side effect, the work also produced several public repositories containing code and examples for future use in works related to CPSWs.
 \end{abstract}
 
 \section{Introduction}
-In my period abroad at Aarhus university, under the supervision of professor Lukas Esterle, 
+During my period abroad at the Aarhus university, under the supervision of professor Lukas Esterle, 
  I was mainly focused on the topics of engineering Cyber-physical Swarms (CPSWs)~\cite{aguzzi2021research}, which could be defined as a
  large ensemble of computational devices that collectively reach goals through repeated local interactions, similar to what we observe in natural swarms. 
 CPSWs are typically characterized by 
@@ -36,7 +37,7 @@ CPSWs are typically characterized by
 \item homogenous and decentralized behaviours, meaning that each node executes the ``same'' program without a global authority,
 \item large scale, since the system could be composed of thousands/hundreds of nodes, 
 \item an embodiment, that means they have sensors to perceive the environment,
-\item partial observability, because each node could communicate only with a subsect of the entire system.
+\item partial observability, because each node could communicate only with a subset of the entire system.
 \end{itemize}
 CPSWs is an umbrella term that includes several systems, 
 like swarm robotics, large-scale IoT, and smart cities.
@@ -46,50 +47,50 @@ In this context, I made first contributions in combining Deep Learning technique
 Particularly, we use this combination to track and cover spatio-temporal natural phenomena evolution. 
 %
 This is a general application that covers several use cases. 
- Consider, for instance, the program to control wildfires in the forest. 
+ Consider, for instance, a program to control wildfires in the forest. 
  A swarm of drones want to both tracks where the fire moves and also have as much information as possible to understand the fire intensity (cover).
 %
  
 \section{Contribution}
 The main contribution of this work is the combination of AC with \textit{graph neural networks} (GNN)~\cite{wu2020comprehensive} used for predicting spatio-temporal data. 
 We chose to use AC as a reference framework because it is the most natural way to express self-organising and collective behaviours in CPSWs. 
-Moreover, since we needed to process spatio-temporal series to understand the trend of the phenomenon and therefore follow it, we believe that spatio-temporal architectures are the best choice to solve this problem.
+Moreover, since we needed to process spatio-temporal series to understand the trend of the phenomenon and therefore follow it, we believe that spatio-temporal architectures are the best choice to address these issues.
 We outline the main steps to deal with this integration, which are:
  \begin{itemize}
 \item Generate the experience needed to train the model. 
  Depending on the machine learning technique used, 
- the designer will have to try to generate the experience needed to train the model in the right way. In the case of RL for example, we need simulations, in the case of SL (methodology used) we need labelled data.
-\item Train the model on the generated experience. We follow the typical scheme used in CPSWS-like system~\cite{aguzzi2021research, DBLP:conf/icdcs/AguzziCV22}, which is centralized training and distributed execution (CTDE)~\cite{foerster2016learning}. 
+ the designer would have to generate the right amount of experience and in the right way. In the case of RL for example, we need simulations, in the case of SL (i.e., the adopted methodology) we need labelled data.
+\item Train the model on the generated experience. We follow the typical scheme used in CPSWS-like systems~\cite{aguzzi2021research, DBLP:conf/icdcs/AguzziCV22}, which is centralized training and distributed execution (CTDE)~\cite{foerster2016learning}. 
 In this way, during learning, we use centralized information to create distributed controllers that are used by AC to 
 follow the phenomenon over time.
-\item Integrate the neural network model with the AC paradigm. To understand how to integrate the different neural network models with aggregate computing, a study was done on the constructs and dynamics of the different networks. With AC, it is possible to encode space-time models in which the neighbourhood radius is a maximum of 1.
+\item Integrate the neural network model with the AC paradigm. Particularly, I analyse the dynamics of the different neural networks (MLP, RNN and GNN), and I map them in the AC execution model (and consequently its operators) to understand how to integrate them into the aggregate systems.
 \end{itemize}
 
 \section{Activities}
 In order to develop \emph{hybrid} aggregate computing in the use case chosen, we:
 \begin{itemize}
-\item generate synthetic data to simulate a spatio-temporal phenomenon: in this case, we based ourselves on flocking dynamics and built density maps based on the number of nodes in each area. To do this, we used Alchemist---a pervasive system simulator.
-\item train various spatio-temporal network models: using \emph{torch} and the \emph{spatio-temporal-torch}~\cite{rozemberczki2021pytorch}~\footnote{\url{https://pytorch.org/}} library, we trained different networks to understand the differences in performance of the various models. 
-\item integrate aggregate computing with the GNNs using ScaFi~\cite{casadei2022scafi}, a framework for aggregate computing at scale, and ScalaPy~\cite{laddad2020scalapy}, a facade that allows Scala to communicate with python.
-\item validate the result: with the generated neural networks, we exported some metrics to understand the performance of the studied system, this phase is still in progress.
+\item generated synthetic data to simulate a spatio-temporal phenomenon: in this case, we based ourselves on flocking dynamics and built density maps based on the number of nodes in each area. To do this, we used Alchemist---a pervasive system simulator;
+\item trained various spatio-temporal network models: using \emph{torch} and the \emph{spatio-temporal-torch}~\cite{rozemberczki2021pytorch}~\footnote{\url{https://pytorch.org/}} library, we trained different networks to understand the differences in performance of the various models;
+\item integrated aggregate computing with the GNNs using ScaFi~\cite{casadei2022scafi}, a framework for aggregate computing at scale, and ScalaPy~\cite{laddad2020scalapy}, a facade that allows Scala to communicate with python;
+\item validated the result: with the generated neural networks, we exported some metrics to understand the performance of the studied system, this phase is still in progress.
 \end{itemize}
-As a side effect, we produce several public repositories in which we collect the code and other material used in this period:
+As a consequence, we produce several public repositories in which we collected the code and other material used in this period:
 \begin{itemize}
-\item \url{https://github.com/cric96/scala-boids} codebase used to generate environmental data
-\item \url{https://github.com/cric96/code-2022-aarhus-gnn} main code used to train the graph neural network
-\item \url{https://github.com/cric96/simulation-2022-aarhus-gnn-scafi} simulation used to validate the trained network
-\item \url{https://github.com/cric96/presentation-aarhus-period-abroad} presentation that summarize the activities done
+\item \url{https://github.com/cric96/scala-boids} codebase used to generate environmental data;
+\item \url{https://github.com/cric96/code-2022-aarhus-gnn} main code used to train the graph neural network;
+\item \url{https://github.com/cric96/simulation-2022-aarhus-gnn-scafi} simulation used to validate the trained network;
+\item \url{https://github.com/cric96/presentation-aarhus-period-abroad} presentation that summarize the performed activities.
 \end{itemize}
 
 \section{Future Works}
 Firstly, we want to conclude the study and then publish our results in a conference paper (ACSOS 2023 or ALIFE 2023).
 Moreover, this work had a broad impact on my research interest~\cite{aguzzi2021research, aguzzi2022addressing, aguzzi2022towards, DBLP:conf/icdcs/AguzziCV22}. 
 Indeed, as we proposed in the first place, one of the goals of the machine learning integration is to use it at the middleware level to improve QoS aspects. 
-GNN, in this context, will help to create robust applications and solve several issues that we deal with in the first phases of my PhD, just to mention some:
+GNN, in this context, would help creating robust applications and solve several issues that we dealt with during the first phases of my PhD, just to mention some:
 \begin{itemize}
-    \item representation learning: GNN could be a method to learn what is the best feature to use for a given problem. In our first effort in hybrid AC, we highlight that the feature engineering part was crucial and had a big impact on the performance of our proposed solution
+    \item representation learning: GNN could be a method to learn what is the best feature to use for a given problem. In our first effort in hybrid AC, we highlighted that the feature engineering part was crucial and had a big impact on the performance of our proposed solution
     \item graph-structure: the aggregate system could be conceptualised as a graph, in which each node could access only the first hop neighbourhood. 
-    In doing this, GNN is a good method to represent these dynamics, and then it will be easy to generalise to the variable neighbourhood.
+    In doing this, GNN is a good method to represent these dynamics, and then it would be easy to generalise to the variable neighbourhood.
 \end{itemize}
 \bibliographystyle{alpha}
 \bibliography{latex.bib}

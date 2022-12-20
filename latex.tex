@@ -28,67 +28,70 @@ Spatiotemporal phenomena tracking and covering in Cyber-Physical Swarms \\[10pt]
 \end{abstract}
 
 \section{Introduction}
-In my period abroad at Aarhus university, under the supervision of the professor Lukas Esterle, 
- I was mainly focused on the topics of engineering Cyberphysical Swarms (CPSWs), that could be defined as a
- large ensemble of computational devices that collective reach goals through repeated local interactions, similarly as what we observe in natural swarms. 
+In my period abroad at Aarhus university, under the supervision of professor Lukas Esterle, 
+ I was mainly focused on the topics of engineering Cyber-physical Swarms (CPSWs)~\cite{aguzzi2021research}, which could be defined as a
+ large ensemble of computational devices that collectively reach goals through repeated local interactions, similar to what we observe in natural swarms. 
 CPSWs are typically characterized by 
 \begin{itemize}
-\item homogenous and decentralized behaviours, meaning that each node execute the ``same'' program without a global authority,
-\item large scale, since the system could be composed by thousands/hundred of nodes, 
+\item homogenous and decentralized behaviours, meaning that each node executes the ``same'' program without a global authority,
+\item large scale, since the system could be composed of thousands/hundreds of nodes, 
 \item an embodiment, that means they have sensors to perceive the environment,
-\item partial observability, due to the fact that each node could communicate only with a subsect of the entire system.
+\item partial observability, because each node could communicate only with a subsect of the entire system.
 \end{itemize}
-CPSWs is an umbrella that include several systems, like swarm robotics, large scale IoT, and smart cities.
+CPSWs is an umbrella term that includes several systems, 
+like swarm robotics, large-scale IoT, and smart cities.
 %
-In this context, I made first contributions in combining Deep Learning techniques with \textit{aggregate computing} (AC) 
- -- a top-down global to local approach to programming self-organising collective behaviour.
+In this context, I made first contributions in combining Deep Learning techniques with \textit{aggregate computing} (AC)~\cite{beal2015aggregate}
+ -- a top-down global to local approach to program self-organising collective behaviour.
 Particularly, we use this combination to track and cover spatio-temporal natural phenomena evolution. 
 %
 This is a general application that covers several use cases. 
- Consider for instance the program of control wildfire in the forest. 
- A swarm of drones what to both track where the fire moves and also to have as more information as possible to understand the fire intensity (cover).
+ Consider, for instance, the program to control wildfires in the forest. 
+ A swarm of drones want to both tracks where the fire moves and also have as much information as possible to understand the fire intensity (cover).
 %
  
 \section{Contribution}
-The main contribution of this work is the combination of AC with \textit{graph neural networks} (GNN) used for predicting spatio-temporal data. 
-We chose to use AC as a reference framework because it is the most natural way to express self-organized and collective behaviours in CPSWs. 
+The main contribution of this work is the combination of AC with \textit{graph neural networks} (GNN)~\cite{wu2020comprehensive} used for predicting spatio-temporal data. 
+We chose to use AC as a reference framework because it is the most natural way to express self-organising and collective behaviours in CPSWs. 
 Moreover, since we needed to process spatio-temporal series to understand the trend of the phenomenon and therefore follow it, we believe that spatio-temporal architectures are the best choice to solve this problem.
-We outline the main steps to deal with this integration, that are:
+We outline the main steps to deal with this integration, which are:
  \begin{itemize}
 \item Generate the experience needed to train the model. 
  Depending on the machine learning technique used, 
- the designer will have to try to generate the experience needed to train the model in the right way. I
- n the case of RL for example, we need simulations, in the case of SL (methodology used) we need labelled data.
-\item Train the model on the generated experience. We follow the typical scheme used in CPSWS-like system, which is centralized training and distributed execution (CTDE). 
+ the designer will have to try to generate the experience needed to train the model in the right way. In the case of RL for example, we need simulations, in the case of SL (methodology used) we need labelled data.
+\item Train the model on the generated experience. We follow the typical scheme used in CPSWS-like system~\cite{aguzzi2021research, DBLP:conf/icdcs/AguzziCV22}, which is centralized training and distributed execution (CTDE)~\cite{foerster2016learning}. 
 In this way, during learning, we use centralized information to create distributed controllers that are used by AC to 
 follow the phenomenon over time.
-\item Integrate the neural network model with the AC paradigm. to understand how to integrate the different neural network models with aggregate computing, a study was done on the constructs and dynamics of the different networks. With AC, it is possible to encode space-time models in which the neighbourhood radius is maximum 1.
+\item Integrate the neural network model with the AC paradigm. To understand how to integrate the different neural network models with aggregate computing, a study was done on the constructs and dynamics of the different networks. With AC, it is possible to encode space-time models in which the neighbourhood radius is a maximum of 1.
 \end{itemize}
 
 \section{Activities}
-In order to develop \emph{hybrid} aggregate computing in the use case choosed, we:
+In order to develop \emph{hybrid} aggregate computing in the use case chosen, we:
 \begin{itemize}
-\item generate synthetic data to simulate a spatio-temporal phenomenon: in this case we based ourselves on flocking dynamics and built density maps based on the number of nodes in each area. To do this, we used Alchemist---a pervasive system simulator.
-\item train various spatio-temporal network models: using \emph{torch} and the \emph{spatio-temporal-torch} library, we trained different networks to understand the differences in performance of the various models. 
-\item integrate aggregate computing with the GNNs using ScaFi, a framework for aggregate computing at scale, and scalapy, a facade that allows Scala to communicate with python.
+\item generate synthetic data to simulate a spatio-temporal phenomenon: in this case, we based ourselves on flocking dynamics and built density maps based on the number of nodes in each area. To do this, we used Alchemist---a pervasive system simulator.
+\item train various spatio-temporal network models: using \emph{torch} and the \emph{spatio-temporal-torch}~\cite{rozemberczki2021pytorch}~\footnote{\url{https://pytorch.org/}} library, we trained different networks to understand the differences in performance of the various models. 
+\item integrate aggregate computing with the GNNs using ScaFi~\cite{casadei2022scafi}, a framework for aggregate computing at scale, and ScalaPy~\cite{laddad2020scalapy}, a facade that allows Scala to communicate with python.
 \item validate the result: with the generated neural networks, we exported some metrics to understand the performance of the studied system, this phase is still in progress.
 \end{itemize}
 As a side effect, we produce several public repositories in which we collect the code and other material used in this period:
 \begin{itemize}
 \item \url{https://github.com/cric96/scala-boids} codebase used to generate environmental data
 \item \url{https://github.com/cric96/code-2022-aarhus-gnn} main code used to train the graph neural network
-\item \url{https://github.com/cric96/simulation-2022-aarhus-gnn-scafi} simulation used for validate the trained network
+\item \url{https://github.com/cric96/simulation-2022-aarhus-gnn-scafi} simulation used to validate the trained network
 \item \url{https://github.com/cric96/presentation-aarhus-period-abroad} presentation that summarize the activities done
 \end{itemize}
 
 \section{Future Works}
-Firstly, we want to conclude the study and then publish our result in a conference paper (ACSOS 2023 or ALIFE 2023).
-Moroever, this work has a broad impact in my research interest. Indeed, as we proposed in the first pleace, one of the goal of the machine learning integration is to using it at the middleware level in order to improve QoS aspects. GNN, in this context, will help to create robust applications and solve several issues that we deal with in the first phases of my PhD, just the method some:
+Firstly, we want to conclude the study and then publish our results in a conference paper (ACSOS 2023 or ALIFE 2023).
+Moreover, this work had a broad impact on my research interest~\cite{aguzzi2021research, aguzzi2022addressing, aguzzi2022towards, DBLP:conf/icdcs/AguzziCV22}. 
+Indeed, as we proposed in the first place, one of the goals of the machine learning integration is to use it at the middleware level to improve QoS aspects. 
+GNN, in this context, will help to create robust applications and solve several issues that we deal with in the first phases of my PhD, just to mention some:
 \begin{itemize}
-    \item representation learning: GNN could be a method to learn what are the best feature to used for a given problem. In our first effort in hybrid AC, we highlight that the feature engineering part was crucial and has a big impact in the performance of our proposed solution
-    \item graph-structure: aggregate system could be conceptualised as a graph, in which each node could access only to the first hop neighbourhood. In doing this, GNN are a good method to represent this dynamics, and then i will be easily to generalise to variable neighbourhood.
+    \item representation learning: GNN could be a method to learn what is the best feature to use for a given problem. In our first effort in hybrid AC, we highlight that the feature engineering part was crucial and had a big impact on the performance of our proposed solution
+    \item graph-structure: the aggregate system could be conceptualised as a graph, in which each node could access only the first hop neighbourhood. 
+    In doing this, GNN is a good method to represent these dynamics, and then it will be easy to generalise to the variable neighbourhood.
 \end{itemize}
 \bibliographystyle{alpha}
-\bibliography{sample}
+\bibliography{latex.bib}
 
 \end{document}
